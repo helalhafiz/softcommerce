@@ -28,7 +28,6 @@ if($RequestMthod == "GET"){
 
 
 //Return All Products
-
 function getProducts(){
 
     $Product = new Product();
@@ -38,12 +37,29 @@ function getProducts(){
     
     if($Products){
 
-        $result = json_encode($Products);
-        echo $result;
+        while($row = $Products->fetch_assoc()){
+            $results[] = $row;
+            
+        }
+        $data = json_encode($results);
+        echo $data;
     }else{
         echo "No Products Found!";
     }
 
+}
+
+//Get Product Images
+function getProductImages($productID){
+    $Product = new Product();
+    $sql = "SELECT * from product_images WHERE productID=$productID";
+    $images = $Product->Select($sql);
+
+    if($images){
+        return $images;
+    }else{
+        return false;
+    }
 }
 
 

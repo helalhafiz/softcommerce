@@ -40,19 +40,13 @@ class Product
     //Read Data from Database
     public function Select($query)
     {
-
         $result = $this->conn->query($query);
 
         if ($result->num_rows > 0) {
-            
-            $data = array();
-            while($row = $result->fetch_assoc()){
-                array_push($data,$row);
-            }
             //return the data as array
-            return $data;
+            return $result;
+            
         } else {
-            //return false if data < 0
             return false;
         }
     }
